@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximun-scale=1">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<title>Test RWD</title>
+</head>
+<body>
+	<section id="container">
+		<header>
+			<h1>Mi sitio de Películas</h1>
+			<p>Este es nuestro sitio de películas con Microformatos</p>
+		</header>
+		<section id="content">
+			<article>
+			  <div itemscope itemtype="http://schema.org/Movie">
+					<h2 itemprop="name">El libro de la selva</h2>
+					<div itemprop="director" itemscope="http://schema.org/Person">
+						<div align="right">
+						  <p align="left"><strong>Director:</strong> <span itemprop="director">Jon Favreau	<a href="https://www.youtube.com/watch?v=HcgJRQWxKnw"></a><br>
+						  </span><strong>Género:</strong> Aventura, familia	</p>
+						  <p align="right"><a href="https://www.youtube.com/watch?v=HcgJRQWxKnw">Ver trailer <img src="el libro.jpg" alt="el libro" width="78" height="111" border="0"></a></p>
+						</div>
+					</div>
+				    <div align="right"><a href="https://www.youtube.com/watch?v=HcgJRQWxKnw" itemprop="trailer"></a>				<a href="https://www.youtube.com/watch?v=HcgJRQWxKnw"></a></div>
+			  </div>
+			</article>
+			<article>
+				<h2>Sinópsis</h2>
+				<p align="justify">Nueva versión de <em>El Libro de la selva</em> a cargo de Disney y el polifacético Jon Favreau, conocido por dirigir la saga del superhéroe Iron Man.<br>
+			    La renovada adaptación es una versión de acción real escrita por Justin Marks (<em>Street Fighter: La leyenda</em>), en la que, al igual que las dos anteriores de 1967 y 1994, se contará la vida del famoso niño de la selva.<br>
+			    Mowgli queda huérfano a los 2 años. Abandonado en la selva, es recogido por una manada de lobos, quienes le crían hasta que es capaz de enfrentarse a los peligros de la selva por sí mismo.</p>
+		    </article>
+		</section>
+		<footer> Creado en 2015&copy;		</footer>
+	</section>
+</body>
+</html>
