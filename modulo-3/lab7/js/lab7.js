@@ -1,87 +1,203 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/styles.css" />
-		<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-		<script type="text/javascript" src="js/lab10.js"></script>
-	</head>
-	<body>
-		<form>   
-			<fieldset>
-				<legend>Información General</legend>
-				<fieldset>
-					<div id="userinfo">
-						<span class="label">Documento de Identidad</span>
-						<input type="text" id="nid" placeholder="doc. Identidad" />
-						<span class="nid-error"></span>
+$(document).ready(function(){
 
-						<span class="label">Nombre(s) y Apellido(s)</span>
-						<input type="text" id="username" />
-						<span class="user-error"></span>
-					</div>
-				</fieldset>
-				<fieldset>
-					<div id="user">
-						<span class="label">Password</span>
-						<input type="password" class="password" name="password" />
-						<span class="password-error"></span>
+	     function Validate(){};
 
-						<span class="label">Confirmar Password</span>
-						<input type="password" class="conf-password" name="conf-password" />
-						<span class="conf-password-error"></span>
-					</div>
-					<div>
-						<span class="label">Email</span>
-						<input type="email" class="emailadd" name="emailid" />
-						<span class="email-error"></span>
-					</div>
-				</fieldset>
-				<fieldset>
-					<div id="checkboxes">
-						<span class="label">Seleccionar Alimentos</span><br>
-						<input type="checkbox"  id="pizza" name="pizza" value=5000  class="chkb">Pizza $5000 <br>
-						<input type="checkbox"  id="hotdog" name="hotdog" value=3000  class="chkb">HotDog $3000<br>
-						<input type="checkbox"  id="coke" name="coke" value=2000  class="chkb">Coca-Cola $2000<br>
-						<input type="checkbox"  id="fries" name="fries" value=3000  class="chkb">Papas Fritas $3000<br />
-						<span class="food-error"></span>
-						<br />
-						<span class="food-total"></span>
-						<br />
-					</div>
-				</fieldset>
-				<fieldset>
-					<div id="radios">
-						<span class="label">Modo de Pago</span><br>
-						<input type="radio"  name="paymode" class="radiobtn" value="Master Card">Master Card <br />
-						<input type="radio"  name="paymode" class="radiobtn" value="Visa Card">Visa Card<br />
-						<span class="pay-error"></span>
-					</div>
-				</fieldset>
-				<fieldset>
-					<div>
-						<span class="label">Ciudad</span>
-						<select id="city" class="infobox">
-							<option value="0">Seleccione una ciudad</option>
-							<option value="Barranquilla">Barranquilla</option>
-							<option value="Bogota">Bogotá</option>
-							<option value="Calí">Calí</option>
-							<option value="Cartagena">Cartagena</option>
-							<option value="Medellin">Medellin</option>
-						</select><br />
-						<span class="city-error"></span>
-					</div>
-				</fieldset>
-				<div id="buttons">
-					<button class="button" href="#">Enviar</button>
-				</div>
-		</fieldset>
-	</form> 
+  		Validate.prototype = {
+  			email : function(email){
+      			var pattern = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/);
+      			return pattern.test(email);
+    		},
+			userid : function(uid){
+      				var pattern = new RegExp(/^[0-9]+$/);
+      				return pattern.test(uid);
+			}
+  		};
 
-	<div id="openModal" class="modalDialog">
-		<div>
-			<a href="#close" title="Close" class="close">X</a>
-		</div>
-	</div>
-	</body>
-</html>
+
+
+  		  $('.nid-error').addClass('error');
+		  $('.nid-error').hide();
+		  $('.user-error').addClass('error');
+		  $('.user-error').hide();
+		  $('.password-error').addClass('error');
+		  $('.password-error').hide();
+		  $('.conf-password-error').addClass('error');
+		  $('.conf-password-error').hide();
+		  $('.email-error').addClass('error');
+		  $('.email-error').hide();
+		  $('.food-error').addClass('error');
+		  $('.food-error').hide();
+		  $('.pay-error').addClass('error');
+		  $('.pay-error').hide();
+		  $('.city-error').addClass('error');
+		  $('.city-error').hide();
+		  $('#buttons #info').remove();
+
+
+		   $('.button').bind('click', function(event){
+
+			  	var validate = new Validate();
+
+			  	var data = $('#nid').val();
+
+			  	if(validate.userid(data)){
+			      $('#nid').next().hide();
+			      $('.nid-error').next().hide();
+			      localStorage.setItem('nid', data);
+			    }
+			    else{
+			      $('#nid').next().show();
+			      $('input#nid').addClass('error');
+			      $('.nid-error').next().show();
+			      $('.nid-error').text('Indique su Documento de Identidad');
+			    }
+
+			    var data=$('#username').val();
+
+			    var len=data.length;
+			    
+			    if(len<1 && data === ""){
+			      $('#username').next().show();
+			      $('.user-error').next().show();
+			      $('.user-error').text('Por favor indique su(s) Nombre(s) y Apellido(s)');
+			    }
+			    else{
+			      $('#username').next().hide();
+			      $('.user-error').next().hide();
+			      localStorage.setItem('username', data);
+			    }
+
+			    var data=$('.password').val();
+
+			    var len=data.length;
+			    
+			    if(len<1 && len!==""){
+			      $('.password').next().show();
+			      $('.password-error').next().show();
+			      $('.password-error').text('Indique una Contraseña');
+			    }
+			    else{
+			      $('.password').next().hide();
+			      $('.password-error').next().hide();
+			    }
+
+
+			    var confData=$('.conf-password').val();
+
+			    var len=confData.length;
+
+			    if(len<1){
+			      $('.conf-password').next().show();
+			      $('.conf-password-error').next().show();
+			      $('.conf-password-error').text('Confirme la Contraseña');
+			    }
+			    else{
+			      $('.conf-password').next().hide();
+			      $('.conf-password-error').next().hide();
+
+			      if($('.password').val() !== $('.conf-password').val()){
+			        $('.conf-password').next().show();
+			        $('.conf-password-error').next().show();
+			        $('.conf-password-error').text('¡La Contraseña No es igual!');
+			      }
+			      else{
+			        $('.conf-password').next().show();
+			        $('.conf-password-error').hide();
+			        localStorage.setItem('password', data);
+			      }
+			    }
+
+
+			    var  data = $('.emailadd').val();
+			    
+			    if(validate.email(data)){
+			      // $('.emailadd').next().hide();
+			      $('.email-error').hide();
+			      localStorage.setItem('email', data);
+			    }
+			    else{
+			      $('.emailadd').next().show();
+			      $('.email-error').next().show();
+			      $('.email-error').text('¡El email es incorrecto!');
+			    }
+
+
+			    var count=0, meals={};
+			    
+			    $('#checkboxes').find(':checkbox').each(function(){
+			      if($(this).is(':checked')){
+			        count+=parseInt($(this).val());
+			        meals[$(this).attr('name')] = parseInt($(this).val());
+			      }
+			    });
+			    
+			    if(count===0){
+			      $('.food-error').css({'margin':50}).show();
+			      $('.food-error').text('¡Debe seleccionar un Alimento!');
+			    }
+			    else{
+			      $('.food-error').hide();
+			      $('.food-total').show();
+			      $('.food-total').text('Total de la compra: $' + count + ' M/Cte');
+			      localStorage.setItem('total', count);
+			      localStorage.setItem('meals', JSON.stringify(meals));
+			    }
+
+
+			    var count=0;
+
+			    $('#radios').find(':radio').each(function(){
+			      if($(this).is(':checked')){
+			        count++;
+			        localStorage.setItem('paymode', $(this).val());
+			      }
+			    });
+			    if(count===0){
+			      $('.pay-error').css({'margin-left':50}).show();
+			      $('.pay-error').text('Debe seleccionar un modo de Pago');
+			    }
+			    else{
+			      $('.pay-error').hide();
+			    }
+
+
+			    var count=$('select option:selected').val();
+			    if(count==="0"){
+			      $('.city-error').show();
+			      $('.city-error').text('¡Debe seleccionar una Ciudad!');
+			    }
+			    else{
+			      $('.city-error').hide();
+			      localStorage.setItem('city', count);
+			      $('#buttons').append(
+			        '<a id="info" href="#openModal">Ver Pedido</a>'
+			      );
+			      $('.inputs').removeClass('error');
+			      $('.inputs').addClass('success');
+			    }
+			    event.preventDefault();
+
+			  });
+
+
+$(document).on('click', '#info', function(){
+
+    $('#openModal > div').append(
+      '<h2>Este es tu pedido</h2>' +
+      '<ul>' +
+      '<li>Su nombre es: ' + localStorage.getItem('username') + '</li>' +
+      '<li>Su documento es: ' + localStorage.getItem('nid') + '</li>' +
+      '<li>Su email es: ' + localStorage.getItem('email') + '</li>' +     
+      '<li id="listMeals">Los alimentos que Solicita son: <ul></ul></li>' + 
+      '<li>El modo de pago es: ' + localStorage.getItem('paymode') + '</li>' +  
+      '<li>La ciudad donde habita es: ' + localStorage.getItem('city') + '</li></ul>'  
+
+    );
+    var meals =  JSON.parse(localStorage.getItem('meals'));
+
+    $.each(meals, function(key, value){
+          $('#listMeals > ul').append('<li>El producto ' + key + ' cuesta $' + value + ' M/Cte</li>');
+    });
+  });
+		
+});
