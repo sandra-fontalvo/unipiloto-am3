@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="reveal-app">
+<head>
+	<title>AngularJS First Application</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+	<div ng-controller="controllerOne">
+		<div ng-show="revealDiv">
+			<text><b>El Modelo:</b> Es la representación de la información con la cual el sistema opera, por lo tanto gestiona todos los accesos a dicha información, tanto consultas como actualizaciones, implementando también los privilegios de acceso que se hayan descrito en las especificaciones de la aplicación (lógica de negocio).
+<br>Envía a la 'vista' aquella parte de la información que en cada momento se le solicita para que sea mostrada (típicamente a un usuario). Las peticiones de acceso o manipulación de información llegan al 'modelo' a través del 'controlador'.</text>
+		</div>
+
+		<button ng-click="controlButton()" ng-show="revealButton">lab 12</button>
+	</div>
+	<script type="text/javascript" src="../assets/angular.min.js"></script>
+
+	<script type="text/javascript">
+
+	angular.module('reveal-app', [])
+		   .controller('controllerOne', function($scope){
+		   		$scope.revealDiv = false;
+		   		$scope.revealButton = true;
+
+		   		$scope.controlButton = function(){
+		   			$scope.revealDiv = true;
+		   			$scope.revealButton = false;
+		   		};
+
+		   });
+	</script>
+
+
+</body>
+</html>
