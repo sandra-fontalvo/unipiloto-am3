@@ -12,7 +12,7 @@
           Envía a la 'vista' aquella parte de la información que en cada momento se le solicita para que sea mostrada (típicamente a un usuario). Las peticiones de acceso o manipulación de información llegan al 'modelo' a través del 'controlador'.</text>
 		</div>
 
-		<button ng-click="controlButton()" ng-show="revealButton">lab 12</button>
+		<button ng-click="controlButton()" ng-show="revealButton">mostrar</button> <button ng-click="controlButton1()">ocultar</button>
 	</div>
 	<script type="text/javascript" src="../assets/angular.min.js"></script>
 
@@ -26,6 +26,11 @@
 		   		$scope.controlButton = function(){
 		   			$scope.revealDiv = true;
 		   			$scope.revealButton = false;
+		   		};
+				
+				$scope.controlButton1 = function(){
+		   			$scope.revealDiv = false;
+		   			$scope.revealButton = true;
 		   		};
 
 		   });
