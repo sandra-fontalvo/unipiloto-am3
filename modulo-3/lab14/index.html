@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="tech">
+<head>
+	<title>AngularJS First Application</title>
+	<meta charset="utf-8" />
+	<script type="text/javascript" src="../assets/angular.min.js"></script>
+</head>
+<body>
+	<div ng-controller="tech_controller">
+		<h1>Program</h1>
+		<ul>
+			<li ng-repeat="tech in simple_tech">{{ names }}</li>
+		</ul>
+
+		<h1>Values</h1>
+		<ul>
+			<li ng-repeat="value in values">{{ value.code1 }} {{ value.code2 }}</li>
+		</ul>
+	</div>
+	
+	<script type="text/javascript">
+	angular.module('tech', [])
+	       .controller('tech_controller', ['$scope', function($scope){
+	       	$scope.simple_tech = ["Cobol", "C++", "asp","php","net","rpg"];
+            $scope.values = [
+                {
+                    code1: "1",
+                    code2: "2"
+                },
+                {
+                    code1: "3",
+                    code2: "4"
+                },
+                {
+                    code1: "5",
+                    code2: "6"
+                },
+                {
+                    code1: "7",
+                    code2: "8"
+                },
+                {
+                    code1: "9",
+                    code2: "10"
+                },
+                {
+                    code1: "11",
+                    code2: "12"
+                }
+            ];
+	       }])
+		
+	</script>
+</body>
+</html>
